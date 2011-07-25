@@ -7,7 +7,7 @@
 Summary: A systems integration framework, built to bring the benefits of configuration management to your entire infrastructure
 Name: rubygem-%{gemname}
 Version: 0.10.2
-Release: 1%{?dist}
+Release: 2%{?dist}%{?buildstamp}
 Group: Development/Languages
 License: GPLv2+ or Ruby
 URL: http://wiki.opscode.com/display/chef
@@ -112,6 +112,9 @@ fi
 %{_sysconfdir}/chef
 
 %changelog
+* Mon Jul 25 2011 Sergio Rubio <rubiojr@frameos.org> - 0.10.2-2
+- rubygem-chef-server.spec
+
 * Mon Jul 04 2011 Sergio Rubio <rubiojr@frameos.org> - 0.10.2-1
 - upstream update
 
