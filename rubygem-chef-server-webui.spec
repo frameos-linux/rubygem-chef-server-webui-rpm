@@ -2,16 +2,17 @@
 %define ruby_sitelib %(ruby -rrbconfig -e "puts Config::CONFIG['sitelibdir']")
 %define gemdir %(ruby -rubygems -e 'puts Gem::dir' 2>/dev/null)
 %define gemname chef-server-webui
-%define geminstdir %{gemdir}/gems/%{gemname}-%{version}
+%define prerelease .rc.2
+%define geminstdir %{gemdir}/gems/%{gemname}-%{version}%{?prerelease}
 
 Summary: A systems integration framework, built to bring the benefits of configuration management to your entire infrastructure
 Name: rubygem-%{gemname}
-Version: 0.10.4
-Release: 1%{?buildstamp}%{?dist}
+Version: 0.10.6
+Release: 0rc2%{?buildstamp}%{?dist}
 Group: Development/Languages
 License: GPLv2+ or Ruby
 URL: http://wiki.opscode.com/display/chef
-Source0: http://rubygems.org/downloads/%{gemname}-%{version}.gem
+Source0: http://rubygems.org/downloads/%{gemname}-%{version}%{?prerelease}.gem
 Source1: chef-server-webui.init
 Source2: chef-server-webui.sysconfig
 Source3: chef-server-webui.logrotate
@@ -24,7 +25,6 @@ Requires: rubygem(merb-assets) = 1.1.3
 Requires: rubygem(merb-helpers) = 1.1.3
 Requires: rubygem(merb-haml) = 1.1.3
 Requires: rubygem(merb-param-protection) = 1.1.3
-Requires: rubygem(json) <= 1.4.6
 Requires: rubygem(json) >= 1.4.4
 Requires: rubygem(thin) >= 0
 Requires: rubygem(haml) >= 0
@@ -32,7 +32,7 @@ Requires: rubygem(ruby-openid) >= 0
 Requires: rubygem(coderay) >= 0
 BuildRequires: rubygems
 BuildArch: noarch
-Provides: rubygem(%{gemname}) = %{version}
+Provides: rubygem(%{gemname}) = %{version}%{?prerelease}
 
 Requires(post): chkconfig
 Requires(preun): chkconfig
@@ -98,13 +98,13 @@ fi
 %files
 %defattr(-, root, root, -)
 %{_bindir}/chef-server-webui
-%{gemdir}/gems/%{gemname}-%{version}/
-%doc %{gemdir}/doc/%{gemname}-%{version}
+%{gemdir}/gems/%{gemname}-%{version}%{?prerelease}/
+%doc %{gemdir}/doc/%{gemname}-%{version}%{?prerelease}
 %doc %{geminstdir}/README.rdoc
 %doc %{geminstdir}/LICENSE
 %doc %{geminstdir}/config.ru
-%{gemdir}/cache/%{gemname}-%{version}.gem
-%{gemdir}/specifications/%{gemname}-%{version}.gemspec
+%{gemdir}/cache/%{gemname}-%{version}%{?prerelease}.gem
+%{gemdir}/specifications/%{gemname}-%{version}%{?prerelease}.gemspec
 %config(noreplace) %{_sysconfdir}/sysconfig/chef-server-webui
 %config(noreplace) %{_sysconfdir}/logrotate.d/chef-server-webui
 %config(noreplace) %{_sysconfdir}/chef/webui.rb
