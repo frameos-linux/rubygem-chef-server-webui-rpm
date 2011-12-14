@@ -2,13 +2,13 @@
 %define ruby_sitelib %(ruby -rrbconfig -e "puts Config::CONFIG['sitelibdir']")
 %define gemdir %(ruby -rubygems -e 'puts Gem::dir' 2>/dev/null)
 %define gemname chef-server-webui
-%define prerelease .rc.2
+#%define prerelease 
 %define geminstdir %{gemdir}/gems/%{gemname}-%{version}%{?prerelease}
 
 Summary: A systems integration framework, built to bring the benefits of configuration management to your entire infrastructure
 Name: rubygem-%{gemname}
 Version: 0.10.6
-Release: 0rc2%{?buildstamp}%{?dist}
+Release: 1%{?buildstamp}%{?dist}
 Group: Development/Languages
 License: GPLv2+ or Ruby
 URL: http://wiki.opscode.com/display/chef
@@ -112,6 +112,9 @@ fi
 %{_sysconfdir}/chef
 
 %changelog
+* Wed Dec 14 2011 Sergio Rubio <rubiojr@frameos.org> - 0.10.6-1
+- bumped version 0.10.6
+
 * Wed Jul 27 2011 Sergio Rubio <rubiojr@frameos.org> - 0.10.4-1
 - preparing for 0.10.4
 
